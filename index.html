@@ -578,6 +578,7 @@
                 <a href="#about-us" class="text-gray-600 hover:text-blue-700 transition duration-300 ease-in-out rounded-md p-2 nav-link">About Us</a>
                 <a href="#services" class="text-gray-600 hover:text-blue-700 transition duration-300 ease-in-out rounded-md p-2 nav-link">Services</a>
                 <a href="#content" class="text-gray-600 hover:text-blue-700 transition duration-300 ease-in-out rounded-md p-2 nav-link">Content</a>
+                <a href="#" class="text-gray-600 hover:text-blue-700 transition duration-300 ease-in-out rounded-md p-2" onclick="openHireTalentModal()">Hire Talent</a>
             </nav>
 
             <!-- Combined Theme Switcher, Get In Touch, and Auth Buttons -->
@@ -626,6 +627,8 @@
                 <a href="#about-us" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 w-full text-center rounded-md nav-link">About Us</a>
                 <a href="#services" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 w-full text-center rounded-md nav-link">Services</a>
                 <a href="#content" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 w-full text-center rounded-md nav-link">Content</a>
+                <a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 w-full text-center rounded-md" onclick="openHireTalentModal()">Hire Talent</a>
+
                 <!-- Mobile Theme Toggles -->
                 <div class="flex space-x-1 mt-2">
                     <button id="mobileThemeToggleSun" class="px-2 py-1 text-gray-800 rounded-full hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 transition duration-200 ease-in-out theme-icon" title="Light/Default Theme">
@@ -878,6 +881,33 @@
         </div>
     </div>
 
+    <!-- Hire Talent Modal -->
+    <div id="hireTalentModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button" id="closeHireTalentModalBtn">&times;</span>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Hire Talent</h3>
+            <form class="max-w-xl mx-auto space-y-6">
+                <div>
+                    <label for="hireName" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                    <input type="text" id="hireName" class="shadow-sm appearance-none border rounded-md w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out" placeholder="Your Name">
+                </div>
+                <div>
+                    <label for="hireEmail" class="block text-gray-700 text-sm font-bold mb-2">Email ID</label>
+                    <input type="email" id="hireEmail" class="shadow-sm appearance-none border rounded-md w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out" placeholder="Your Email">
+                </div>
+                <div>
+                    <label for="hireMobile" class="block text-gray-700 text-sm font-bold mb-2">Mobile Number</label>
+                    <input type="tel" id="hireMobile" class="shadow-sm appearance-none border rounded-md w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out" placeholder="Your Mobile Number">
+                </div>
+                <div>
+                    <label for="hireResume" class="block text-gray-700 text-sm font-bold mb-2">Upload Resume</label>
+                    <input type="file" id="hireResume" class="shadow-sm appearance-none border rounded-md w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out">
+                </div>
+                <button type="submit" class="w-full px-5 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-300 ease-in-out shadow-md">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Chatbot Floating Action Button (FAB) -->
     <button id="openChatbotFab" class="chatbot-fab">
         <!-- Original message SVG icon -->
@@ -1122,6 +1152,39 @@
                 if (event.target == contactModal) {
                     contactModal.classList.add('hidden');
                     contactModal.style.display = 'none';
+                }
+            });
+        }
+
+        // Hire Talent Modal Functions
+        const hireTalentModal = document.getElementById('hireTalentModal');
+        const closeHireTalentModalBtn = document.getElementById('closeHireTalentModalBtn');
+
+        function openHireTalentModal() {
+            if (hireTalentModal) {
+                hireTalentModal.classList.remove('hidden');
+                hireTalentModal.style.display = 'flex';
+            }
+             // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        }
+        window.openHireTalentModal = openHireTalentModal;
+
+        if (closeHireTalentModalBtn && hireTalentModal) {
+            closeHireTalentModalBtn.addEventListener('click', () => {
+                hireTalentModal.classList.add('hidden');
+                hireTalentModal.style.display = 'none';
+            });
+        }
+
+        if (hireTalentModal) {
+            window.addEventListener('click', (event) => {
+                if (event.target == hireTalentModal) {
+                    hireTalentModal.classList.add('hidden');
+                    hireTalentModal.style.display = 'none';
                 }
             });
         }
